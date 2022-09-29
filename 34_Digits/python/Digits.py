@@ -116,7 +116,7 @@ def main() -> None:
             for number in numbers:
                 s = 0
                 my_guess = 0
-                for j in range(0, 3):
+                for j in range(3):
                     # What did the original author have in mind ?
                     # The first expression always results in 0 because a is always 0
                     s1 = a * k[z2][j] + b * l[int(z1)][j] + c * m[int(z)][j]

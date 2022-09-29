@@ -54,7 +54,7 @@ def main() -> None:
         # The following number, indicates the end of the segment.
         end = next(data)
         # Unlike FOR I=X TO Y, the 'stop' argument of 'range' is non-inclusive, so we must add 1
-        for i in range(start, end + 1, 1):
+        for i in range(start, end + 1):
             # Cycle through the letters in "BUNNY" as we draw line
             j = i - 5 * int(i / 5)
             print(chr(L + bunny[j]), end="")

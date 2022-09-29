@@ -34,11 +34,7 @@ class Stock_Market:
         return self.cash_assets + self.stock_assets
 
     def _generate_day_change(self) -> None:
-        self.changes = []
-        for _ in range(len(self.data)):
-            self.changes.append(
-                round(random.uniform(-5, 5), 2)
-            )  # Random % Change b/w -5 and 5
+        self.changes = [round(random.uniform(-5, 5), 2) for _ in range(len(self.data))]
 
     def update_prices(self) -> None:
         self._generate_day_change()
@@ -65,9 +61,9 @@ class Stock_Market:
         print("\nSTOCK\t\t\t\t\tINITIALS\tPRICE/SHARE($)")
         for stock, data in self.data.items():
             if stock != "LBJ":
-                print("{}\t\t\t{}\t\t{}".format(data["Name"], stock, data["Price"]))
+                print(f'{data["Name"]}\t\t\t{stock}\t\t{data["Price"]}')
             else:
-                print("{}\t\t{}\t\t{}".format(data["Name"], stock, data["Price"]))
+                print(f'{data["Name"]}\t\t{stock}\t\t{data["Price"]}')
 
         self.print_exchange_average()
         self.print_assets()

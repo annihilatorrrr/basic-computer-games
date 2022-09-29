@@ -52,14 +52,16 @@ def line_170(board, g, h, j, k):
 
 def line_150(board, g, h, j, k):
     if board[k] != g:  # line 150
-        if (
-            board[k] == h  # line 160
-            or board[k + 6] != g  # line 161
-            or board[k + 3] != g
-        ):  # line 162
-            return -1  # Goto 170
-        else:
-            return k + 3  # Line 163
+        return (
+            -1
+            if (
+                board[k] == h  # line 160
+                or board[k + 6] != g  # line 161
+                or board[k + 3] != g
+            )
+            else k + 3
+        )
+
     elif board[k + 6] != g:  # line 152
         if board[k + 6] != 0 or board[k + 3] != g:  # line 165
             return -1  # Goto 170
@@ -70,16 +72,7 @@ def line_150(board, g, h, j, k):
 
 
 def line_120(board, g, h, j, k):
-    if board[j] != g:
-        if board[j] == h or board[j + 2] != g or board[j + 1] != g:
-            if board[k] != g:
-                if board[k + 6] != g and (board[k + 6] != 0 or board[k + 3] != g):
-                    # 450 IF G=1 THEN 465
-                    pass
-            elif board[j + 2] is not g:  # Line 122
-                pass
-            elif board[j + 1] is not OccupiedBy.EMPTY:
-                pass
+    pass
 
 
 def line_118(board, g, h):
@@ -123,12 +116,14 @@ def think(board, g, h, moves):
 def render_board(board, space_mapping):
     vertical_divider = "!"
     horizontal_divider = "---+---+---"
-    lines = []
-    lines.append(vertical_divider.join(space_mapping[space] for space in board[0:3]))
-    lines.append(horizontal_divider)
-    lines.append(vertical_divider.join(space_mapping[space] for space in board[3:6]))
-    lines.append(horizontal_divider)
-    lines.append(vertical_divider.join(space_mapping[space] for space in board[6:9]))
+    lines = [
+        vertical_divider.join(space_mapping[space] for space in board[:3]),
+        horizontal_divider,
+        vertical_divider.join((space_mapping[space] for space in board[3:6])),
+        horizontal_divider,
+        vertical_divider.join((space_mapping[space] for space in board[6:9])),
+    ]
+
     return "\n".join(lines)
 
 
@@ -143,9 +138,7 @@ def determine_winner(board, g):
             return Winner.PLAYER
 
     # Check for matching vertical lines
-    for i in range(
-        Space.TOP_LEFT.value, Space.TOP_RIGHT.value + 1, 1
-    ):  # Second third of Line 1115
+    for i in range(Space.TOP_LEFT.value, Space.TOP_RIGHT.value + 1):  # Second third of Line 1115
         if (
             board[i] != board[i + 3] or board[i] != board[i + 6]
         ):  # Last third of Line 1115

@@ -73,12 +73,8 @@ def setup_players() -> List[str]:
     # ensure we get an integer value from the user
     number_of_players = basic_input("HOW MANY WANT TO BET", int)
 
-    # for each user query their name and return the list of names
-    player_names = []
     basic_print("WHEN ? APPEARS,TYPE NAME")
-    for _ in range(number_of_players):
-        player_names.append(basic_input(""))
-    return player_names
+    return [basic_input("") for _ in range(number_of_players)]
 
 
 def setup_horses() -> List[float]:
@@ -167,15 +163,11 @@ def print_race_state(total_distance, race_pos) -> None:
     # print all 28 lines/unit of the race course
     for line in range(28):
 
-        # ensure we still have a horse to print and if so, check if the
-        # next horse to print is not the current line
-        # needs iteration, since multiple horses can share the same line
         while next_pos is not None and line == total_distance[next_pos]:
             basic_print(f"{next_pos} ", end="")
             next_pos = next(race_pos_iter, None)
-        else:
-            # if no horses are left to print for this line, print a new line
-            basic_print("")
+        # if no horses are left to print for this line, print a new line
+        basic_print("")
 
     # finish line
     basic_print("XXXXFINISHXXXX")

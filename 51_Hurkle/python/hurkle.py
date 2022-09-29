@@ -47,7 +47,7 @@ def main() -> None:
         A = int(G * random())
         B = int(G * random())
 
-        for k in range(0, N):
+        for k in range(N):
             print("\nGUESS #" + str(k))
 
             # read coordinates in `X, Y` format, split the string

@@ -44,7 +44,7 @@ def get_pattern() -> Dict[int, str]:
         # staying in.
 
         if line[0] == ".":
-            line = " " + line[1:]
+            line = f" {line[1:]}"
         pattern[c] = line
         c += 1
 
@@ -64,15 +64,15 @@ def main() -> None:
     max_x = MAX_HEIGHT - 1
     max_y = MAX_WIDTH - 1
 
-    a = [[0 for y in range(MAX_WIDTH)] for x in range(MAX_HEIGHT)]
+    a = [[0 for _ in range(MAX_WIDTH)] for _ in range(MAX_HEIGHT)]
     p = 0
     g = 0
     invalid = False
 
     # line 140
     # transcribe the input pattern into the active array
-    for x in range(0, pattern_height):
-        for y in range(0, len(pattern[x])):
+    for x in range(pattern_height):
+        for y in range(len(pattern[x])):
             if pattern[x][y] != " ":
                 a[min_x + x][min_y + y] = 1
                 p += 1
@@ -81,11 +81,7 @@ def main() -> None:
     print()
     print()
     while True:
-        if invalid:
-            inv_str = "INVALID!"
-        else:
-            inv_str = ""
-
+        inv_str = "INVALID!" if invalid else ""
         print(f"GENERATION: {g}\tPOPULATION: {p} {inv_str}")
 
         next_min_x = MAX_HEIGHT - 1
@@ -151,7 +147,7 @@ def main() -> None:
                 count = 0
                 for i in range(x - 1, x + 2):
                     for j in range(y - 1, y + 2):
-                        if a[i][j] == 1 or a[i][j] == 2:
+                        if a[i][j] in [1, 2]:
                             count += 1
                 if a[x][y] == 0:
                     if count == 3:

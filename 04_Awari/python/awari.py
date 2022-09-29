@@ -83,11 +83,10 @@ LOSING_BOOK_SIZE = 50
 
 def draw_pit(line: str, board, pit_index) -> str:
     val = board[pit_index]
-    line = line + " "
+    line += " "
     if val < 10:
-        line = line + " "
-    line = line + str(val) + " "
-    return line
+        line += " "
+    return line + str(val) + " "
 
 
 def draw_board(board) -> None:
@@ -107,7 +106,7 @@ def draw_board(board) -> None:
 
     # Draw the bottom (player) pits
     line = "   "
-    for i in range(0, 6):
+    for i in range(6):
         line = draw_pit(line, board, i)
     print(line)
     print()
@@ -116,7 +115,7 @@ def draw_board(board) -> None:
 
 def play_game(board: List[int]) -> None:
     # Place the beginning stones
-    for i in range(0, 13):
+    for i in range(13):
         board[i] = 3
 
     # Empty the home pits
@@ -148,7 +147,7 @@ def play_game(board: List[int]) -> None:
             print(msg)
             break
         if landing_spot == home:
-            landing_spot, is_still_going, home, msg = computer_move(msg + " , ", board)
+            landing_spot, is_still_going, home, msg = computer_move(f"{msg} , ", board)
         if not is_still_going:
             print(msg)
             break
@@ -183,7 +182,7 @@ def computer_move(msg: str, board) -> Tuple[int, bool, int, str]:
 
         best_player_move_quality = 0
         # for all legal human moves 0-5 (responses to computer move computer_move)
-        for human_move_start in range(0, 6):
+        for human_move_start in range(6):
             if board[human_move_start] == 0:
                 continue
 
@@ -248,7 +247,7 @@ def computer_move(msg: str, board) -> Tuple[int, bool, int, str]:
 
     move_str = chr(42 + selected_move)
     if msg:
-        msg += ", " + move_str
+        msg += f", {move_str}"
     else:
         msg = move_str
 
@@ -323,10 +322,7 @@ def execute_move(move, home: int, board) -> Tuple[int, bool, int]:
         # losses.
         losing_book[game_number] = losing_book[game_number] * 6 + move_digit
 
-    if player_has_stones(board) and computer_has_stones(board):
-        is_still_going = True
-    else:
-        is_still_going = False
+    is_still_going = bool(player_has_stones(board) and computer_has_stones(board))
     return last_location, is_still_going, home
 
 

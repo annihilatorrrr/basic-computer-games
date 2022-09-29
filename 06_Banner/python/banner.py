@@ -74,9 +74,7 @@ def print_banner() -> None:
 
         except ValueError:
             print("Please enter a number greater than zero")
-    g1 = 0
-    if input("Centered ").lower().startswith("y"):
-        g1 = 1
+    g1 = 1 if input("Centered ").lower().startswith("y") else 0
     character = input(
         "Character (type 'ALL' if you want character being printed) "
     ).upper()
@@ -87,12 +85,12 @@ def print_banner() -> None:
     for statement_char in statement:
         s = letters[statement_char].copy()
         x_str = character
-        if character == "ALL":
+        if x_str == "ALL":
             x_str = statement_char
         if x_str == " ":
             print("\n" * (7 * horizontal))
         else:
-            for u in range(0, 7):
+            for u in range(7):
                 for k in range(8, -1, -1):
                     if 2**k >= s[u]:
                         j[8 - k] = 0
@@ -104,7 +102,7 @@ def print_banner() -> None:
                             break
                 for _t1 in range(1, horizontal + 1):
                     line_str = " " * int((63 - 4.5 * vertical) * g1 / len(x_str) + 1)
-                    for b in range(0, f[u] + 1):
+                    for b in range(f[u] + 1):
                         if j[b] == 0:
                             for _ in range(1, vertical + 1):
                                 line_str = line_str + " " * len(x_str)

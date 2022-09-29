@@ -113,7 +113,7 @@ def mission_failure() -> None:
         p_death=(enemy_gunner_accuracy + missile_threat_weighting) / 100
     )
 
-    return player_survived() if not death else player_death()
+    return player_death() if death else player_survived()
 
 
 def play_italy() -> None:

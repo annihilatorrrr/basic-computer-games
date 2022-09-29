@@ -32,7 +32,7 @@ def display_field() -> None:
 
 
 def positions_list() -> List[int]:
-    return list(range(1, 26, 1))
+    return list(range(1, 26))
 
 
 def generate_enemy_positions() -> Set[int]:

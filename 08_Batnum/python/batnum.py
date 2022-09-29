@@ -153,10 +153,8 @@ def computer_pick(
     q = pile_size - 1 if win_option == WinOptions.AvoidLast else pile_size
     c = min_select + max_select
     computer_pick = q - (c * int(q / c))
-    if computer_pick < min_select:
-        computer_pick = min_select
-    if computer_pick > max_select:
-        computer_pick = max_select
+    computer_pick = max(computer_pick, min_select)
+    computer_pick = min(computer_pick, max_select)
     return computer_pick
 
 
@@ -184,7 +182,7 @@ def computer_move(
 
     # Otherwise, we determine how many the computer selects
     curr_sel = computer_pick(pile_size, min_select, max_select, win_option)
-    pile_size = pile_size - curr_sel
+    pile_size -= curr_sel
     print(f"COMPUTER TAKES {curr_sel} AND LEAVES {pile_size}")
     return (False, pile_size)
 

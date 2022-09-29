@@ -43,7 +43,7 @@ def pre_run(gates, max_speeds) -> None:
             print("Gate Max")
             print(" # M.P.H.")
             print("----------")
-            for i in range(0, gates):
+            for i in range(gates):
                 print(f" {i + 1}  {max_speeds[i]}")
             cmd = ask("Command--")
         else:
@@ -184,7 +184,7 @@ def main() -> None:
         run(gates, lvl, max_speeds)
         while True:
             answer = ask("Do you want to play again?")
-            if answer == "YES" or answer == "NO":
+            if answer in ["YES", "NO"]:
                 break
             else:
                 print('Please type "YES" or "NO"')

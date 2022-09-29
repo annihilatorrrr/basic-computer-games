@@ -206,7 +206,7 @@ def jump_stats(previous_jumps, chute_altitude) -> Tuple[int, int]:
     the current jump is better.
     """
     n_previous_jumps = len(previous_jumps)
-    n_better = sum(1 for pj in previous_jumps if chute_altitude < pj)
+    n_better = sum(chute_altitude < pj for pj in previous_jumps)
     return n_previous_jumps, n_better
 
 
@@ -311,9 +311,9 @@ def main() -> None:
         z = yes_no_input("DO YOU WANT TO PLAY AGAIN")
         if not z:
             z = yes_no_input("PLEASE")
-            if not z:
-                print("SSSSSSSSSS.")
-                break
+        if not z:
+            print("SSSSSSSSSS.")
+            break
 
 
 if __name__ == "__main__":
